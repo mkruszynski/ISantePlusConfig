@@ -19,8 +19,8 @@ cp -a ./openmrs-2.5-modules ~/.OpenMRS/isanteplus/modules
 cp ./openmrs-runtime.properties ~/.OpenMRS/isanteplus/openmrs-runtime.properties
 cp ./openmrs.war $CATALINA_HOME/webapps/isanteplus.war
 
-sed -i "s/username=/username=$root/" ~/.OpenMRS/isanteplus/openmrs-runtime.properties
-sed -i "s/password=/password=$password/" ~/.OpenMRS/isanteplus/openmrs-runtime.properties
+sed -i "s/username=/username=$root/" ~/.OpenMRS/isanteplus/isanteplus-runtime.properties
+sed -i "s/password=/password=$password/" ~/.OpenMRS/isanteplus/isanteplus-runtime.properties
 
 # die tomcat
 ps aux | grep tomcat | awk '{print $2}' | xargs kill
