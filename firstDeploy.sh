@@ -10,20 +10,15 @@ read password
 stty $stty_orig
 
 mysql -u$root -p$password -e "DROP DATABASE IF EXISTS openmrs"
-mysql -u$root -p$password -e "CREATE DATABASE openmrs"
-mysql -u$root -p$password "openmrs" < ./openmrs_dump.sql
 
 mkdir ~/.OpenMRS
-mkdir ~/.OpenMRS/isanteplus
-cp -a ./openmrs-2.5-modules ~/.OpenMRS/isanteplus/modules
-cp ./openmrs-runtime.properties ~/.OpenMRS/isanteplus/openmrs-runtime.properties
-cp ./openmrs.war $CATALINA_HOME/webapps/isanteplus.war
-
-sed -i "s/username=/username=$root/" ~/.OpenMRS/isanteplus/isanteplus-runtime.properties
-sed -i "s/password=/password=$password/" ~/.OpenMRS/isanteplus/isanteplus-runtime.properties
+cp -a ./openmrs-2.5-modules ~/.OpenMRS/modules
+cp ./openmrs.war $CATALINA_HOME/webapps/openmrs.war
 
 # die tomcat
 ps aux | grep tomcat | awk '{print $2}' | xargs kill
 
 sleep 2
 $CATALINA_HOME/bin/catalina.sh jpda start
+
+tail -F $CATALINA_HOME/logs/catalina.out
